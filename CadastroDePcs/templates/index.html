@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Computadores</title>
+    <!-- Tag Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Tag CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Cadastro de Computadores</h1>
+        <!-- Formulário para filtrar por data -->
+        <form action="/" method="POST" class="mb-4">
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <label class="sr-only" for="start_date">Data Inicial</label>
+                    <input type="date" class="form-control mb-2" id="start_date" name="start_date" placeholder="Data Inicial">
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="end_date">Data Final</label>
+                    <input type="date" class="form-control mb-2" id="end_date" name="end_date" placeholder="Data Final">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2">Filtrar por Data</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Botão para cadastrar novo computador -->
+        <a href="/add" class="btn btn-success mb-3">Cadastrar Novo Computador</a>
+        
+        <!-- Tabela de computadores cadastrados -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Patrimônio</th>
+                    <th scope="col">Funcionário</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Data de Chegada</th>
+                    <th scope="col">Problema</th>
+                    <th scope="col">Data de Saída</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Reparo Realizado</th>
+                    <!-- Para adicionar os outros cabeçalhos aqui -->
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if computers %}
+                    {% for computer in computers %}
+                        <tr>
+                            <th scope="row">{{ computer[0] }}</th>
+                            <td>{{ computer[1] }}</td>
+                            <td>{{ computer[2] }}</td>
+                            <td>{{ computer[3] }}</td>
+                            <td>{{ computer[4] }}</td>
+                            <td>{{ computer[5] }}</td>
+                            <td>{{ computer[6] }}</td>
+                            <td>{{ computer[7] }}</td>
+                            <td>{{ computer[8] }}</td>
+                            <!-- Para adicionar as outras colunas aqui -->
+                            <td>
+                                <a href="/edit/{{ computer[0] }}" class="btn btn-primary">Editar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="10" class="text-center">Nenhum computador encontrado.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
